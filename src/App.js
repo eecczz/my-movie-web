@@ -1,22 +1,17 @@
 // App.js
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomeMain from './components/HomeMain';
-import Login from './components/Login';
-import { URLS } from './services/URL';
+import Wishlist from './components/Wishlist';
+import Popular from './components/Popular';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
-  };
-
   return (
-    <Router basename="/my-movie-web"> {/* basename 설정 */}
+    <Router basename="/my-movie-web">
       <Routes>
-        <Route path="/login" element={<Login onSuccess={handleLoginSuccess} />} />
-        <Route path="/home" element={<HomeMain url={URLS.popularMovies(1)} />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/popular" element={<Popular />} />
+        <Route path="/" element={<HomeMain />} />
       </Routes>
     </Router>
   );

@@ -1,29 +1,39 @@
 // Login.js
 import React, { useState } from 'react';
-import { tryLogin } from '../services/Authentication';
+import { useNavigate } from 'react-router-dom';
 
-function Login({ onSuccess }) {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    tryLogin(
-      email,
-      password,
-      onSuccess,
-      (errMsg) => setError(errMsg)
-    );
+  const handleLogin = () => {
+    if (email === 'user@example.com' && password === 'password') {
+      localStorage.setItem('isLoggedIn', 'true');
+      navigate('/'); // 로그인 성공 시 홈으로 이동
+      window.location.reload(); // 로그인 상태 업데이트를 위해 페이지 새로고침
+    } else {
+      alert('Invalid credentials');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <button type="submit">Login</button>
-      {error && <p>{error}</p>}
-    </form>
+    <div className="login">
+      <h2>Login</h2>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={handleLogin}>Login</button>
+    </div>
   );
 }
 

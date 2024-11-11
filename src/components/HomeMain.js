@@ -1,9 +1,10 @@
 // HomeMain.js
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import Header from './Header'; // 헤더 컴포넌트 추가
+import Header from './Header';
 import { fetchMovies, URLS } from '../services/URL';
-import "slick-carousel/slick/slick.css"; 
+import { FaHeart } from 'react-icons/fa'; // 좋아요 아이콘
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './HomeMain.css';
 
@@ -26,6 +27,9 @@ function HomeMain() {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [discoverMovies, setDiscoverMovies] = useState([]);
+  const [wishlist, setWishlist] = useState(
+    JSON.parse(localStorage.getItem('wishlist')) || []
+  );
 
   useEffect(() => {
     async function loadMovies() {
@@ -46,6 +50,16 @@ function HomeMain() {
     loadMovies();
   }, []);
 
+  const handleWishlistToggle = (movie) => {
+    const isAlreadyInWishlist = wishlist.some((item) => item.id === movie.id);
+    const updatedWishlist = isAlreadyInWishlist
+      ? wishlist.filter((item) => item.id !== movie.id) // 제거
+      : [...wishlist, movie]; // 추가
+
+    setWishlist(updatedWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
+
   const sliderSettings = {
     dots: false,
     infinite: true,
@@ -53,18 +67,26 @@ function HomeMain() {
     slidesToShow: 5,
     slidesToScroll: 1,
     arrows: true,
-    draggable: false, // 드래그로 슬라이드 이동 비활성화
+    draggable: false,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />
   };
 
   const renderMovies = (movies) => (
-    movies.map(movie => (
+    movies.map((movie) => (
       <div key={movie.id} className="movie-item">
         <div className="movie-image-container">
           <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
           <div className="movie-info">
-            <h3>{movie.title}</h3>
+            <h3>
+              {movie.title}
+              <button
+                className="wishlist-button"
+                onClick={() => handleWishlistToggle(movie)}
+              >
+                <FaHeart color={wishlist.some((item) => item.id === movie.id) ? 'red' : 'white'} />
+              </button>
+            </h3>
             <p>{movie.overview.slice(0, 60)}...</p>
           </div>
         </div>
@@ -74,7 +96,7 @@ function HomeMain() {
 
   return (
     <div className="home-main">
-      <Header /> {/* 헤더 추가 */}
+      <Header />
       <h2>Popular Movies</h2>
       <div className="slider-container">
         <Slider {...sliderSettings}>

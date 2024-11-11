@@ -110,3 +110,46 @@ body {
 .custom-arrow:hover {
   background-color: rgba(85, 85, 85, 0.9);
 }
+
+/* HomeMain.css */
+.wishlist-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+
+.wishlist .wishlist-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wishlist .movie-item {
+  margin: 10px;
+}
+
+.popular .movies {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.popular .movie-item {
+  margin: 10px;
+}
+
+.pagination {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.pagination .active {
+  font-weight: bold;
+  color: red;
+}
