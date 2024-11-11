@@ -1,0 +1,48 @@
+/* Header.css */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #141414;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+  }
+  
+  .header__logo img {
+    height: 30px;
+  }
+  
+  .header__nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .header__nav a:hover {
+    color: #e50914;
+  }
+  
+  .header__actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header__icon {
+    color: #fff;
+    margin-right: 20px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .header__profile img {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

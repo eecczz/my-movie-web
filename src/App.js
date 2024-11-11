@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomeMain from './components/HomeMain';
+import Login from './components/Login';
+import { URLS } from './services/URL';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router basename="/my-movie-web"> {/* basename 설정 */}
+      <Routes>
+        <Route path="/login" element={<Login onSuccess={handleLoginSuccess} />} />
+        <Route path="/home" element={<HomeMain url={URLS.popularMovies(1)} />} />
+      </Routes>
+    </Router>
   );
 }
 
