@@ -23,3 +23,23 @@ export async function fetchMovies(url) {
     throw error;
   }
 }
+
+// 동적 URL 호출을 위한 새 함수
+export async function fetchDynamicMovies(endpoint, queryParams = {}) {
+  try {
+    const url = new URL(`${baseURL}${endpoint}`);
+    url.searchParams.append('api_key', apiKey);
+    url.searchParams.append('language', 'ko-KR');
+
+    // 추가 쿼리 파라미터 처리
+    Object.keys(queryParams).forEach((key) => {
+      url.searchParams.append(key, queryParams[key]);
+    });
+
+    const response = await axios.get(url.toString());
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching dynamic movies:', error);
+    throw error;
+  }
+}

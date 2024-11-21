@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { fetchMovies } from '../services/URL';
+import { fetchDynamicMovies } from '../services/URL';
 import './SearchResults.css';
 
 function SearchResults() {
@@ -14,7 +14,7 @@ function SearchResults() {
       if (query) {
         try {
           // TMDb API에서 검색 결과 가져오기
-          const data = await fetchMovies(`/search/movie?query=${encodeURIComponent(query)}`);
+          const data = await fetchDynamicMovies(`/search/movie?query=${encodeURIComponent(query)}`);
           setMovies(data.results || []);
         } catch (error) {
           console.error('Error fetching search results:', error);
