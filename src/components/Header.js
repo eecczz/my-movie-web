@@ -9,7 +9,7 @@ function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    navigate('/my-movie-web/signin'); // 로그아웃 후 로그인 페이지로 이동
+    navigate('/signin'); // 로그아웃 후 로그인 페이지로 이동
   };
 
   return (
