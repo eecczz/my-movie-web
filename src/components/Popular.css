@@ -1,93 +1,97 @@
-/* Popular.css */
-
 .popular {
-    padding: 20px;
-    color: #fff;
-  }
-  
-  .popular h2 {
-    font-size: 1.5em;
-    margin: 20px 0 10px;
-  }
-  
-  .movies {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .movie-item {
-    position: relative;
-    overflow: hidden;
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  .movie-image-container {
-    position: relative;
-  }
-  
-  .movie-image-container img {
-    width: 100%;
-    transition: transform 0.3s ease;
-  }
-  
-  .movie-image-container:hover img {
-    transform: scale(1.1);
-  }
-  
-  /* 영화 정보 오버레이 */
-  .movie-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    text-align: left;
-    opacity: 0;
-    transform: translateY(100%);
-    transition: all 0.3s ease;
-  }
-  
-  .movie-image-container:hover .movie-info {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  .movie-info h3 {
-    font-size: 1em;
-    margin: 0 0 5px;
-  }
-  
-  .movie-info p {
-    font-size: 0.8em;
-    margin: 0;
-  }
-  
-  /* 좋아요 버튼 스타일 */
-  .wishlist-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2em;
-    margin-left: 10px;
-  }
-  
-  /* 페이지네이션 버튼 */
-  .pagination {
-    display: flex;
-    gap: 5px;
-    margin-top: 10px;
-  }
-  
-  .pagination button {
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .pagination .active {
-    font-weight: bold;
-    color: red;
-  }
-  
+  padding: 20px;
+  color: #fff;
+}
+
+.popular h2 {
+  font-size: 1.5em;
+  margin: 20px 0;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.view-toggle button {
+  padding: 10px 15px;
+  cursor: pointer;
+  border: none;
+  background-color: #e50914;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.view-toggle button:hover {
+  background-color: #f40612;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.movie-item {
+  position: relative;
+  width: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #333;
+}
+
+.movie-image-container img {
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.movie-image-container:hover img {
+  transform: scale(1.1);
+}
+
+.movie-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+}
+
+.movie-image-container:hover .movie-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wishlist-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.pagination {
+  display: flex;
+  gap: 5px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #e50914;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.pagination button.active {
+  font-weight: bold;
+}
