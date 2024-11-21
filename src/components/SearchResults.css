@@ -1,0 +1,27 @@
+.search-results {
+    padding: 20px;
+    color: white;
+  }
+  
+  .movies-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .movie-item {
+    width: 200px;
+    text-align: center;
+  }
+  
+  .movie-item img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .movie-item h3 {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #fff;
+  }
+  
