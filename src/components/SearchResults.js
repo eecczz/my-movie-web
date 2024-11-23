@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchDynamicMovies } from '../services/URL';
 import './SearchResults.css';
+import Header from './Header';
 
 function SearchResults() {
   const location = useLocation();
@@ -113,6 +114,7 @@ function SearchResults() {
 
   return (
     <div className="search-results">
+      <Header />
       <h2>검색 결과: "{query}"</h2>
 
       {/* 필터 UI */}

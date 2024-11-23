@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Auth.css'; // 공통 스타일
 
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Remember Me: 저장된 이메일과 비밀번호를 불러오기
+    const savedEmail = localStorage.getItem('savedEmail');
+    const savedPassword = localStorage.getItem('savedPassword');
+    if (savedEmail && savedPassword) {
+      setEmail(savedEmail);
+      setPassword(savedPassword);
+      setRememberMe(true);
+    }
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -15,9 +28,17 @@ function SignIn() {
 
     if (user) {
       localStorage.setItem('authToken', email); // 이메일을 저장하여 사용자 아이디 표시
-      navigate('/'); // 로그인 성공 시 /로 이동
+      if (rememberMe) {
+        localStorage.setItem('savedEmail', email);
+        localStorage.setItem('savedPassword', password);
+      } else {
+        localStorage.removeItem('savedEmail');
+        localStorage.removeItem('savedPassword');
+      }
+      toast.success('로그인 성공!', { position: 'top-center', autoClose: 2000 });
+      setTimeout(() => navigate('/'), 2000); // 로그인 성공 시 /로 이동
     } else {
-      setError('Invalid email or password.');
+      toast.error('이메일 또는 비밀번호가 잘못되었습니다.', { position: 'top-center', autoClose: 3000 });
     }
   };
 
@@ -39,13 +60,26 @@ function SignIn() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {error && <p className="error">{error}</p>}
-        <button type="submit">Log In</button>
+        <div className="remember-me">
+          <input
+            type="checkbox"
+            id="rememberMe"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+          />
+          <label htmlFor="rememberMe">Remember Me</label>
+        </div>
+        <button type="submit" className="auth-button">
+          Log In
+        </button>
       </form>
       <p>
         Don't have an account?{' '}
-        <a href="/my-movie-web/signup">Sign up</a>
+        <a href="/my-movie-web/signup" className="auth-link">
+          Sign up
+        </a>
       </p>
+      <ToastContainer />
     </div>
   );
 }

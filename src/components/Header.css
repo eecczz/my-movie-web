@@ -27,7 +27,7 @@
 
 .header__nav {
   display: flex;
-  gap: 15px;
+  gap: 20px; /* 네비게이션 링크 간 간격 */
 }
 
 .header__nav a {
@@ -45,7 +45,7 @@
 .header__right {
   display: flex;
   align-items: center;
-  gap: 15px; /* 아이콘 및 이메일 간격 */
+  gap: 20px; /* 아이콘 및 이메일 간격 */
 }
 
 .header__user-id {
@@ -64,27 +64,92 @@
   transform: scale(1.1); /* 마우스 오버 시 확대 */
 }
 
-.header__search-input {
+.header__search {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 5px;
-  border-radius: 5px;
+  background-color: #1c1c1c;
+  padding: 5px 10px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.header__search-input input {
+.header__search input {
   border: none;
-  padding: 5px;
-  outline: none;
+  background: transparent;
+  padding: 8px;
+  flex: 1; /* 검색창 너비를 유동적으로 */
+  color: #fff;
   font-size: 14px;
-  flex: 1;
 }
 
-.header__search-input button {
+.header__search input:focus {
+  outline: none;
+}
+
+.header__search button {
   background-color: #e50914;
   color: white;
   border: none;
-  padding: 5px 10px;
-  cursor: pointer;
+  padding: 8px 12px;
   border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.header__search button:hover {
+  background-color: #b00710;
+}
+
+.logout-button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.logout-button:hover {
+  background-color: #b00710;
+}
+
+@media (max-width: 768px) {
+  .header__nav {
+    display: none; /* 작은 화면에서는 네비게이션 숨김 */
+  }
+
+  .header {
+    padding: 10px;
+  }
+
+  .header__logo img {
+    height: 25px;
+  }
+
+  .header__search {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header__search {
+    max-width: 200px;
+  }
+
+  .header__search input {
+    font-size: 12px;
+  }
+
+  .header__search button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .logout-button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
 }

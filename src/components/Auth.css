@@ -1,61 +1,87 @@
 .auth-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #141414;
-    color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .auth-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .auth-container form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .auth-container input {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #333;
-    border-radius: 5px;
-    background-color: #1f1f1f;
-    color: #fff;
-  }
-  
-  .auth-container button {
-    padding: 10px;
-    background-color: #e50914;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .auth-container button:hover {
-    background-color: #f40612;
-  }
-  
-  .auth-container .error {
-    color: #e50914;
-    margin-bottom: 10px;
-  }
-  
-  .auth-container p {
-    text-align: center;
-  }
-  
-  .auth-container a {
-    color: #e50914;
-    text-decoration: none;
-  }
-  
-  .auth-container a:hover {
-    text-decoration: underline;
-  }
-  
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #141414;
+  color: #fff;
+  border-radius: 8px; /* 더 부드러운 모서리를 위해 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7); /* 더 깊은 그림자 */
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  color: #f5f5f5; /* 더 밝은 텍스트 */
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-container input {
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #1c1c1c;
+  color: #fff;
+  font-size: 16px; /* 더 큰 폰트 */
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: #e50914; /* 포커스 시 강조 */
+  background-color: #292929; /* 포커스 시 살짝 밝게 */
+}
+
+.auth-container button {
+  padding: 12px;
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px; /* 더 큰 폰트 */
+  font-weight: bold; /* 더 강한 텍스트 */
+  transition: background-color 0.3s ease;
+}
+
+.auth-container button:hover {
+  background-color: #f40612;
+}
+
+.auth-container .remember-me {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  color: #ccc;
+}
+
+.auth-container .remember-me input {
+  margin-right: 10px;
+}
+
+.auth-container .error {
+  color: #e50914;
+  margin-bottom: 15px;
+  font-weight: bold; /* 에러 메시지 강조 */
+}
+
+.auth-container p {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.auth-container a {
+  color: #e50914;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}

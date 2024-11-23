@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchMovies, URLS } from '../services/URL';
 import Header from './Header';
-import { FaHeart } from 'react-icons/fa'; // 좋아요 아이콘
+import { FaHeart, FaArrowUp } from 'react-icons/fa'; // 좋아요 아이콘
 import './Popular.css';
 
 function Popular() {
@@ -23,6 +23,22 @@ function Popular() {
     }
   }, [page, viewMode]);
 
+  const [setShowScrollButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollButton(window.scrollY > 200); // 스크롤 위치가 200px 이상일 때 버튼 표시
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  
   const loadMovies = async () => {
     const data = await fetchMovies(URLS.popularMovies(page));
     setMovies((prevMovies) => [...prevMovies, ...data.results]);
@@ -127,6 +143,9 @@ function Popular() {
           </div>
         </InfiniteScroll>
       )}
+      <button className="scroll-to-top" onClick={scrollToTop}>
+          <FaArrowUp />
+        </button>
     </div>
   );
 }

@@ -15,11 +15,20 @@ function Header() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    sessionStorage.removeItem('authToken');
+    navigate('/signin');
+  };
+
   return (
     <header className="header">
       <div className="header__logo">
         <a href="/my-movie-web">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo" />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+            alt="Netflix Logo"
+          />
         </a>
       </div>
       <nav className="header__nav">
@@ -28,13 +37,12 @@ function Header() {
         <a href="/my-movie-web/wishlist">내가 찜한 리스트</a>
       </nav>
       <div className="header__actions">
-        {authToken && (
-          <div className="header__user">
-            <span>{authToken}</span>
-            <button onClick={() => localStorage.removeItem('authToken')}>
-            <a href="/my-movie-web/signin">로그아웃</a></button>
-          </div>
-        )}
+        <div className="header__user">
+          <span>{authToken}</span>
+          <button onClick={handleLogout} className="logout-button">
+            로그아웃
+          </button>
+        </div>
         <div className="header__search">
           <input
             type="text"
