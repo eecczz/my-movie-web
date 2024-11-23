@@ -24,22 +24,23 @@ export async function fetchMovies(url) {
   }
 }
 
-// 동적 URL 호출을 위한 새 함수
-export async function fetchDynamicMovies(endpoint, queryParams = {}) {
+
+// TMDb 검색 API에 필터 및 정렬 적용
+export async function fetchDynamicMovies(query, params = {}) {
+  const urlParams = new URLSearchParams({
+    api_key: apiKey,
+    language: 'ko-KR',
+    query: query || '',
+    ...params, // 필터 및 정렬 조건 추가
+  }).toString();
+
+  const url = `${baseURL}/search/movie?${urlParams}`;
+
   try {
-    const url = new URL(`${baseURL}${endpoint}`);
-    url.searchParams.append('api_key', apiKey);
-    url.searchParams.append('language', 'ko-KR');
-
-    // 추가 쿼리 파라미터 처리
-    Object.keys(queryParams).forEach((key) => {
-      url.searchParams.append(key, queryParams[key]);
-    });
-
-    const response = await axios.get(url.toString());
+    const response = await axios.get(url);
     return response.data;
   } catch (error) {
-    console.error('Error fetching dynamic movies:', error);
+    console.error('Error fetching movies:', error);
     throw error;
   }
 }
