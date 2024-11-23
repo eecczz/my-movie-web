@@ -12,7 +12,7 @@ function Wishlist() {
 
   return (
     <div className="wishlist">
-        <Header />
+      <Header />
       <h2>나의 위시리스트</h2>
       <div className="wishlist-items">
         {wishlist.map((movie) => (

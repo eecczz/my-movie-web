@@ -4,24 +4,26 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchDynamicMovies } from '../services/URL';
 import './SearchResults.css';
 import Header from './Header';
+import { FaHeart } from 'react-icons/fa'; // 좋아요 아이콘
 
 function SearchResults() {
   const location = useLocation();
   const query = new URLSearchParams(location.search).get('query');
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [wishlist, setWishlist] = useState(
+    JSON.parse(localStorage.getItem('wishlist')) || []
+  );
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  // 필터 상태 관리
   const [filters, setFilters] = useState({
     genre: '',
     rating: '',
     sort: '',
   });
 
-  // TMDb API에서 데이터를 가져오기
   const fetchMovies = async () => {
     setLoading(true);
     try {
@@ -41,25 +43,21 @@ function SearchResults() {
     }
   };
 
-  // 클라이언트 측 필터와 정렬 적용
   const applyFiltersAndSorting = () => {
     let updatedMovies = [...movies];
 
-    // 장르 필터
     if (filters.genre) {
       updatedMovies = updatedMovies.filter((movie) =>
         movie.genre_ids.includes(parseInt(filters.genre, 10))
       );
     }
 
-    // 평점 필터
     if (filters.rating) {
       updatedMovies = updatedMovies.filter(
         (movie) => movie.vote_average >= parseFloat(filters.rating)
       );
     }
 
-    // 정렬
     if (filters.sort) {
       updatedMovies.sort((a, b) => {
         switch (filters.sort) {
@@ -78,7 +76,6 @@ function SearchResults() {
     setFilteredMovies(updatedMovies);
   };
 
-  // 데이터 가져오기
   useEffect(() => {
     setMovies([]);
     setPage(1);
@@ -97,18 +94,42 @@ function SearchResults() {
     setFilters({ genre: '', rating: '', sort: '' });
   };
 
+  const handleWishlistToggle = (movie) => {
+    const isAlreadyInWishlist = wishlist.some((item) => item.id === movie.id);
+    const updatedWishlist = isAlreadyInWishlist
+      ? wishlist.filter((item) => item.id !== movie.id)
+      : [...wishlist, movie];
+
+    setWishlist(updatedWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
+
   const renderMovies = () =>
     filteredMovies.map((movie) => (
       <div key={movie.id} className="movie-item">
-        <img
-          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-          alt={movie.title}
-        />
-        <h3>{movie.title}</h3>
-        <p>평점: {movie.vote_average}</p>
-        <p>개봉일: {movie.release_date}</p>
+        <div className="movie-image-container">
+          <img
+            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+            alt={movie.title}
+          />
+          <div className="movie-info">
+            <h3>
+              {movie.title}
+              <button
+                className="wishlist-button"
+                onClick={() => handleWishlistToggle(movie)}
+              >
+                <FaHeart
+                  color={wishlist.some((item) => item.id === movie.id) ? 'red' : 'white'}
+                />
+              </button>
+            </h3>
+            <p>{movie.overview.slice(0, 100)}...</p>
+          </div>
+        </div>
       </div>
     ));
+  
 
   if (loading && page === 1) return <div className="loading">검색 중...</div>;
 
@@ -116,8 +137,6 @@ function SearchResults() {
     <div className="search-results">
       <Header />
       <h2>검색 결과: "{query}"</h2>
-
-      {/* 필터 UI */}
       <div className="filters">
         <select
           value={filters.genre}
@@ -129,7 +148,6 @@ function SearchResults() {
           <option value="18">드라마</option>
           <option value="878">SF</option>
         </select>
-
         <select
           value={filters.rating}
           onChange={(e) => setFilters({ ...filters, rating: e.target.value })}
@@ -139,7 +157,6 @@ function SearchResults() {
           <option value="7">7점 이상</option>
           <option value="9">9점 이상</option>
         </select>
-
         <select
           value={filters.sort}
           onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
@@ -149,10 +166,8 @@ function SearchResults() {
           <option value="release_date.desc">최신 개봉순</option>
           <option value="vote_average.desc">평점순</option>
         </select>
-
         <button onClick={resetFilters}>초기화</button>
       </div>
-
       <InfiniteScroll
         dataLength={filteredMovies.length}
         next={() => setPage((prev) => prev + 1)}

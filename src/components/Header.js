@@ -36,14 +36,7 @@ function Header() {
         <a href="/my-movie-web/popular">대세 콘텐츠</a>
         <a href="/my-movie-web/wishlist">내가 찜한 리스트</a>
       </nav>
-      <div className="header__actions">
-        <div className="header__user">
-          <span>{authToken}</span>
-          <button onClick={handleLogout} className="logout-button">
-            로그아웃
-          </button>
-        </div>
-        <div className="header__search">
+      <div className="header__search">
           <input
             type="text"
             value={searchQuery}
@@ -53,6 +46,13 @@ function Header() {
           />
           <button onClick={handleSearch}>
             <FaSearch />
+          </button>
+        </div>
+      <div className="header__actions">
+        <div className="header__user">
+          <span>{authToken}</span>
+          <button onClick={handleLogout} className="logout-button">
+            로그아웃
           </button>
         </div>
       </div>

@@ -1,27 +1,39 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import HomeMain from './components/HomeMain';
-import Wishlist from './components/Wishlist';
 import Popular from './components/Popular';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import Wishlist from './components/Wishlist';
 import SearchResults from './components/SearchResults';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import './App.css';
 
-function App() {
+function AnimatedRoutes() {
+  const location = useLocation();
   const isLoggedIn = !!(localStorage.getItem('authToken') || sessionStorage.getItem('authToken'));
 
   return (
+    <TransitionGroup>
+      <CSSTransition key={location.key} classNames="fade" timeout={300}>
+        <Routes location={location}>
+          {!isLoggedIn && <Route path="*" element={<Navigate to="/signin" />} />}
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/popular" element={<Popular />} />
+          <Route path="/" element={<HomeMain />} />
+          <Route path="/search" element={<SearchResults />} />
+        </Routes>
+      </CSSTransition>
+    </TransitionGroup>
+  );
+}
+
+function App() {
+  return (
     <Router basename="/my-movie-web">
-      <Routes>
-        {!isLoggedIn && <Route path="*" element={<Navigate to="/signin" />} />}
-        <Route path="/signin" element={ <CSSTransition classNames="fade" timeout={300}><SignIn /> </CSSTransition>} />
-        <Route path="/signup" element={<CSSTransition classNames="fade" timeout={300}> <SignUp /></CSSTransition>} />
-        <Route path="/wishlist" element={<CSSTransition classNames="fade" timeout={300}><Wishlist /></CSSTransition>} />
-        <Route path="/popular" element={<CSSTransition classNames="fade" timeout={300}><Popular /></CSSTransition>} />
-        <Route path="/" element={<CSSTransition classNames="fade" timeout={300}><HomeMain /></CSSTransition>} />
-        <Route path="/search" element={<CSSTransition classNames="fade" timeout={300}><SearchResults /></CSSTransition>} />
-      </Routes>
+      <AnimatedRoutes />
     </Router>
   );
 }
