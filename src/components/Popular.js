@@ -23,7 +23,7 @@ function Popular() {
     }
   }, [page, viewMode]);
 
-  const [setShowScrollButton] = useState(false);
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
