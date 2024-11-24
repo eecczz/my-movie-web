@@ -2,8 +2,8 @@
 
 /* 전체 페이지 배경색과 텍스트 색상 설정 */
 body {
-  background-color: #000; /* 검은색 배경 */
-  color: #fff; /* 흰색 텍스트 */
+  background-color: #f9f9f9; /* 연한 회색 배경 */
+  color: #333; /* 검정색 텍스트 */
   margin-top: 60px; /* 헤더의 높이만큼 여백 추가 */
 }
 
@@ -14,7 +14,7 @@ body {
 .home-main h2 {
   font-size: 1.5em;
   margin: 20px 0 10px;
-  color: #fff; /* 텍스트 흰색 */
+  color: #6c63ff; /* 보라색 텍스트 */
 }
 
 /* 슬라이더 컨테이너와 화살표 설정 */
@@ -51,8 +51,8 @@ body {
   left: 0;
   right: 0;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #fff;
+  background-color: rgba(255, 255, 255, 0.8); /* 흰색 배경에 투명도 추가 */
+  color: #333; /* 검정색 텍스트 */
   text-align: left;
   opacity: 0;
   transform: translateY(100%);
@@ -67,11 +67,13 @@ body {
 .movie-info h3 {
   font-size: 1em;
   margin: 0 0 5px;
+  color: #6c63ff; /* 보라색 텍스트 */
 }
 
 .movie-info p {
   font-size: 0.8em;
   margin: 0;
+  color: #555; /* 회색 텍스트 */
 }
 
 /* 커스텀 화살표 버튼 스타일 */
@@ -79,8 +81,8 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(51, 51, 51, 0.7);
-  color: #fff;
+  background-color: rgba(108, 99, 255, 0.8); /* 보라색 반투명 */
+  color: #fff; /* 흰색 아이콘 */
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -109,7 +111,7 @@ body {
 
 /* 화살표 버튼 마우스 오버 시 색상 변경 */
 .custom-arrow:hover {
-  background-color: rgba(85, 85, 85, 0.9);
+  background-color: rgba(108, 99, 255, 1); /* 보라색 */
 }
 
 /* HomeMain.css */
@@ -118,6 +120,7 @@ body {
   border: none;
   cursor: pointer;
   font-size: 1.2em;
+  color: #6c63ff; /* 보라색 */
   margin-left: 10px;
 }
 
@@ -148,11 +151,16 @@ body {
 .pagination button {
   padding: 5px 10px;
   cursor: pointer;
+  background-color: #6c63ff; /* 보라색 */
+  color: #fff; /* 흰색 텍스트 */
+  border-radius: 5px;
+  border: none;
 }
 
-.pagination .active {
+.pagination button.active {
   font-weight: bold;
-  color: red;
+  color: #fff; /* 흰색 */
+  background-color: #4a41d0; /* 진한 보라색 */
 }
 
 .movie-item {
@@ -164,7 +172,7 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: #e50914;
+  background-color: #6c63ff; /* 보라색 */
   color: white;
   padding: 5px 10px;
   font-size: 12px;

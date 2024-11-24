@@ -1,34 +1,25 @@
 body {
-  margin-top: 60px; /* 헤더의 높이만큼 여백 추가 */
+  margin-top: 60px;
 }
 
 .popular {
   padding: 20px;
-  color: #fff;
+  color: #333; /* 검정 텍스트 */
 }
 
 .popular h2 {
   font-size: 1.5em;
   margin: 20px 0;
-}
-
-.view-toggle {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  color: #6c63ff; /* 보라색 */
 }
 
 .view-toggle button {
   padding: 10px 15px;
   cursor: pointer;
   border: none;
-  background-color: #e50914;
-  color: #fff;
+  background-color: #6c63ff; /* 보라색 */
+  color: #fff; /* 흰색 텍스트 */
   border-radius: 5px;
-}
-
-.view-toggle button:hover {
-  background-color: #f40612;
 }
 
 .movies {
@@ -42,16 +33,8 @@ body {
   width: 200px;
   overflow: hidden;
   border-radius: 10px;
-  background-color: #333;
-}
-
-.movie-image-container img {
-  width: 100%;
-  transition: transform 0.3s ease;
-}
-
-.movie-image-container:hover img {
-  transform: scale(1.1);
+  background-color: #fff; /* 흰색 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 연한 그림자 */
 }
 
 .movie-info {
@@ -60,66 +43,6 @@ body {
   left: 0;
   right: 0;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  text-align: center;
-  color: #fff;
-  opacity: 0;
-  transform: translateY(100%);
-  transition: all 0.3s ease;
-}
-
-.movie-image-container:hover .movie-info {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.wishlist-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2em;
-}
-
-.pagination {
-  display: flex;
-  gap: 5px;
-  margin-top: 20px;
-  justify-content: center;
-}
-
-.pagination button {
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  background-color: #e50914;
-  color: #fff;
-  border-radius: 5px;
-}
-
-.pagination button.active {
-  font-weight: bold;
-}
-
-.scroll-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  z-index: 1000;
-}
-
-.scroll-to-top:hover {
-  background-color: #0056b3;
-  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.9); /* 투명한 흰색 */
+  color: #333; /* 검정 텍스트 */
 }

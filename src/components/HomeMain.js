@@ -41,6 +41,9 @@ function HomeMain() {
   const [recommendedMovies, setRecommendedMovies] = useState(
     JSON.parse(localStorage.getItem('recommendedMovies')) || []
   );
+  const [wishlist, setWishlist] = useState(
+    JSON.parse(localStorage.getItem('wishlist')) || []
+  );
 
   useEffect(() => {
     async function loadMovies() {
@@ -71,6 +74,16 @@ function HomeMain() {
     localStorage.setItem('recommendedMovies', JSON.stringify(updatedRecommendedMovies));
   };
 
+  const handleWishlistToggle = (movie) => {
+    const isAlreadyInWishlist = wishlist.some((item) => item.id === movie.id);
+    const updatedWishlist = isAlreadyInWishlist
+      ? wishlist.filter((item) => item.id !== movie.id) // 제거
+      : [...wishlist, movie]; // 추가
+
+    setWishlist(updatedWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
+
   const renderMovies = (movies) => (
     movies.map((movie) => {
       const isRecommended = recommendedMovies.some((item) => item.id === movie.id);
@@ -91,10 +104,10 @@ function HomeMain() {
                   className="wishlist-button"
                   onClick={(e) => {
                     e.stopPropagation(); // 클릭 이벤트 전파 방지
-                    toggleRecommendation(movie);
+                    handleWishlistToggle(movie);
                   }}
                 >
-                  <FaHeart color={isRecommended ? 'red' : 'white'} />
+                  <FaHeart color={wishlist.some((item) => item.id === movie.id) ? 'red' : 'white'} />
                 </button>
               </h3>
               <p>{movie.overview.slice(0, 60)}...</p>
