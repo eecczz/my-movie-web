@@ -13,22 +13,29 @@ function AnimatedRoutes() {
   const location = useLocation();
   const isLoggedIn = !!(localStorage.getItem('authToken') || sessionStorage.getItem('authToken'));
 
+  if (!isLoggedIn && location.pathname !== '/signin' && location.pathname !== '/signup') {
+    // 로그인되지 않은 상태에서 SignIn 또는 SignUp이 아닌 페이지 접근 시 이동
+    return <Navigate to="/signin" replace />;
+  }
+
   return (
     <TransitionGroup>
       <CSSTransition key={location.key} classNames="fade" timeout={300}>
         <Routes location={location}>
-          {!isLoggedIn && <Route path="*" element={<Navigate to="/signin" />} />}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/popular" element={<Popular />} />
           <Route path="/" element={<HomeMain />} />
           <Route path="/search" element={<SearchResults />} />
+          {/* 기본적으로 없는 경로에 대한 처리 */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </CSSTransition>
     </TransitionGroup>
   );
 }
+
 
 function App() {
   return (
