@@ -93,7 +93,7 @@ function Popular() {
                 className="wishlist-button"
                 onClick={() => handleWishlistToggle(movie)}
               >
-                <FaHeart color={wishlist.some((item) => item.id === movie.id) ? 'red' : 'white'} />
+                <FaHeart color={wishlist.some((item) => item.id === movie.id) ? 'gray' : 'white'} />
               </button>
             </div>
           ))}
@@ -131,7 +131,7 @@ function Popular() {
                         className="wishlist-button"
                         onClick={() => handleWishlistToggle(movie)}
                       >
-                        <FaHeart color={wishlist.some((item) => item.id === movie.id) ? 'red' : 'white'} />
+                        <FaHeart color={wishlist.some((item) => item.id === movie.id) ? 'gray' : 'white'} />
                       </button>
                     </h3>
                     <p>{movie.overview.slice(0, 60)}...</p>

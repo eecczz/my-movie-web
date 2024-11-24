@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import Header from './Header';
 import { fetchMovies, URLS } from '../services/URL';
-import { FaHeart } from 'react-icons/fa'; // 좋아요 아이콘
+import { FaHeart } from 'react-icons/fa';
 import "../../node_modules/slick-carousel/slick/slick.css";
 import "../../node_modules/slick-carousel/slick/slick-theme.css";
 import './HomeMain.css';
@@ -84,7 +84,7 @@ function HomeMain() {
     localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
   };
 
-  const renderMovies = (movies) => (
+  const renderMovies = (movies, showTag = true) => (
     movies.map((movie) => {
       const isRecommended = recommendedMovies.some((item) => item.id === movie.id);
       return (
@@ -94,7 +94,8 @@ function HomeMain() {
               src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
               alt={movie.title}
             />
-            {isRecommended && (
+            {/* 추천 영화 태그를 표시 여부 결정 */}
+            {isRecommended && showTag && (
               <div className="recommendation-badge">추천 영화</div>
             )}
             <div className="movie-info">
@@ -107,7 +108,7 @@ function HomeMain() {
                     handleWishlistToggle(movie);
                   }}
                 >
-                  <FaHeart color={wishlist.some((item) => item.id === movie.id) ? 'red' : 'white'} />
+                  <FaHeart color={wishlist.some((item) => item.id === movie.id) ? 'gray' : 'white'} />
                 </button>
               </h3>
               <p>{movie.overview.slice(0, 60)}...</p>
@@ -117,27 +118,26 @@ function HomeMain() {
       );
     })
   );
+  
 
   return (
     <div className="home-main">
       <Header />
+
+      {/* 추천 영화 */}
       <h2>추천 영화</h2>
-      <div className="recommended-container">
+      <div className="slider-container">
         {recommendedMovies.length > 0 ? (
-          recommendedMovies.map((movie) => (
-            <div key={movie.id} className="recommended-movie">
-              <img
-                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                alt={movie.title}
-              />
-              <p>{movie.title}</p>
-            </div>
-          ))
+          <Slider {...sliderSettings}>
+            {renderMovies(recommendedMovies, false)} {/* 태그 숨김 */}
+          </Slider>
         ) : (
           <p>추천 영화가 없습니다. 영화를 클릭하여 추가하세요!</p>
         )}
       </div>
 
+
+      {/* 인기 영화 */}
       <h2>인기 영화</h2>
       <div className="slider-container">
         <Slider {...sliderSettings}>
@@ -145,6 +145,7 @@ function HomeMain() {
         </Slider>
       </div>
 
+      {/* 최고 평점 영화 */}
       <h2>최고평점 영화</h2>
       <div className="slider-container">
         <Slider {...sliderSettings}>
@@ -152,6 +153,7 @@ function HomeMain() {
         </Slider>
       </div>
 
+      {/* 출시될 영화 */}
       <h2>출시될 영화</h2>
       <div className="slider-container">
         <Slider {...sliderSettings}>
@@ -159,6 +161,7 @@ function HomeMain() {
         </Slider>
       </div>
 
+      {/* 액션 영화 */}
       <h2>액션 영화</h2>
       <div className="slider-container">
         <Slider {...sliderSettings}>

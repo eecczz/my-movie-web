@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaSearch, FaArrowUp } from 'react-icons/fa';
+import { FaSearch, FaArrowUp, FaBars } from 'react-icons/fa';
 import './Header.css';
 
 function Header() {
@@ -9,6 +9,7 @@ function Header() {
   const [scrolled, setScrolled] = useState(false); // 스크롤 상태
   const [showScrollToTop, setShowScrollToTop] = useState(false); // 맨위로 버튼 상태
   const authToken = localStorage.getItem('authToken');
+  const [sidebarOpen, setSidebarOpen] = useState(false); // 사이드바 열림 상태
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,16 +45,27 @@ function Header() {
     window.scrollTo({ top: 0, behavior: 'smooth' }); // 부드럽게 스크롤
   };
 
+  const toggleSidebar = () => {
+    setSidebarOpen((prevState) => !prevState); // 상태 반전
+  };
+
   return (
     <>
       <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
         <div className="header__logo">
           <a>
-            <span style={{ color: '#7b42f6', fontWeight: 'bold', fontSize: '24px' }} onClick={() => {
-              navigate('/');
-            }}>SEANEMA</span>
+            <span
+              style={{ color: '#7b42f6', fontWeight: 'bold', fontSize: '24px' }}
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              SEANEMA
+            </span>
           </a>
         </div>
+
+        {/* PC용 네비게이션 */}
         <nav className="header__nav">
           <span
             className="nav-link"
@@ -80,6 +92,8 @@ function Header() {
             내가 찜한 리스트
           </span>
         </nav>
+
+        {/* 검색창 */}
         <div className="header__search">
           <input
             type="text"
@@ -92,15 +106,52 @@ function Header() {
             <FaSearch />
           </button>
         </div>
+
+        {/* 로그아웃 버튼과 이메일 */}
         <div className="header__actions">
-          <div className="header__user">
-            <span>{authToken}</span>
-            <button onClick={handleLogout} className="logout-button">
-              로그아웃
-            </button>
-          </div>
+          <span className="header__user">{authToken}</span>
+          <button onClick={handleLogout} className="logout-button">
+            로그아웃
+          </button>
+        </div>
+
+        {/* 모바일 메뉴 버튼 */}
+        <button className="header__menu-button" onClick={toggleSidebar}>
+          <FaBars />
+        </button>
+
+        {/* 사이드바 */}
+        <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+          <span
+            className="nav-link"
+            onClick={() => {
+              navigate('/');
+              setSidebarOpen(false);
+            }}
+          >
+            홈
+          </span>
+          <span
+            className="nav-link"
+            onClick={() => {
+              navigate('/popular');
+              setSidebarOpen(false);
+            }}
+          >
+            인기 영화
+          </span>
+          <span
+            className="nav-link"
+            onClick={() => {
+              navigate('/wishlist');
+              setSidebarOpen(false);
+            }}
+          >
+            내가 찜한 리스트
+          </span>
         </div>
       </header>
+
       {showScrollToTop && (
         <button className="scroll-to-top" onClick={scrollToTop}>
           <FaArrowUp />

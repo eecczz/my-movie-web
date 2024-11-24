@@ -135,7 +135,7 @@ function SearchResults() {
                 onClick={() => handleWishlistToggle(movie)}
               >
                 <FaHeart
-                  color={wishlist.some((item) => item.id === movie.id) ? 'red' : 'white'}
+                  color={wishlist.some((item) => item.id === movie.id) ? 'gray' : 'white'}
                 />
               </button>
             </h3>
