@@ -125,28 +125,28 @@ function HomeMain() {
         )}
       </div>
 
-      <h2>Popular Movies</h2>
+      <h2>인기 영화</h2>
       <div className="slider-container">
         <Slider {...sliderSettings}>
           {renderMovies(popularMovies)}
         </Slider>
       </div>
 
-      <h2>Top Rated Movies</h2>
+      <h2>최고평점 영화</h2>
       <div className="slider-container">
         <Slider {...sliderSettings}>
           {renderMovies(topRatedMovies)}
         </Slider>
       </div>
 
-      <h2>Upcoming Movies</h2>
+      <h2>출시될 영화</h2>
       <div className="slider-container">
         <Slider {...sliderSettings}>
           {renderMovies(upcomingMovies)}
         </Slider>
       </div>
 
-      <h2>Action Movies</h2>
+      <h2>액션 영화</h2>
       <div className="slider-container">
         <Slider {...sliderSettings}>
           {renderMovies(discoverMovies)}

@@ -9,7 +9,7 @@
   width: 100%;
   z-index: 10;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-sizing: border-box; /* 패딩 포함 */
+  box-sizing: border-box;
 }
 
 .header--scrolled {
@@ -23,24 +23,24 @@
 }
 
 .header--scrolled .header__logo img {
-  transform: scale(0.9); /* 스크롤 시 로고 축소 */
+  transform: scale(0.9);
 }
 
 .header__nav {
   display: flex;
-  gap: 20px; /* 네비게이션 링크 간 간격 */
-  flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
+  gap: 20px;
 }
 
-.header__nav a {
+.nav-link {
   color: #fff;
   text-decoration: none;
   font-size: 14px;
   font-weight: bold;
+  cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.header__nav a:hover {
+.nav-link:hover {
   color: #e50914;
 }
 
@@ -52,7 +52,7 @@
   border-radius: 8px;
   max-width: 400px;
   flex: 1;
-  margin: 0 10px; /* 검색창 양옆에 여백 */
+  margin: 0 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -83,69 +83,43 @@
   background-color: #b00710;
 }
 
-.header__profile {
-  position: relative;
+.header__actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  cursor: pointer;
+  gap: 15px;
+}
+
+.header__user {
   color: white;
+  font-size: 14px;
 }
 
-.profile-icon {
-  font-size: 24px;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 110%; /* 아이콘 아래 위치 */
-  right: 0;
-  background-color: #1c1c1c;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  display: none; /* 기본적으로 숨김 */
-  flex-direction: column;
-  z-index: 1000;
-}
-
-.header__profile:hover .dropdown-menu {
-  display: flex; /* 호버 시 표시 */
-}
-
-.dropdown-item {
-  background: none;
+.logout-button {
+  background-color: #e50914;
+  color: white;
   border: none;
-  color: white;
-  text-align: left;
-  padding: 5px 10px;
+  padding: 8px 12px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.2s;
 }
 
-.dropdown-item:hover {
-  background-color: #e50914;
+.logout-button:hover {
+  background-color: #b00710;
 }
 
 @media (max-width: 768px) {
   .header {
-    flex-wrap: wrap; /* 줄바꿈 허용 */
+    flex-wrap: wrap;
     justify-content: center;
   }
 
   .header__nav {
-    margin-bottom: 10px;
+    justify-content: center;
   }
 
   .header__search {
     max-width: 300px;
-  }
-
-  .dropdown-menu {
-    right: auto; /* 드롭다운 위치 조정 */
-    left: 50%; /* 가운데 정렬 */
-    transform: translateX(-50%);
   }
 }
 
@@ -163,21 +137,8 @@
     font-size: 12px;
   }
 
-  .dropdown-item {
+  .logout-button {
+    padding: 6px 10px;
     font-size: 12px;
-    padding: 5px;
   }
-}
-.logout-button {
-  background-color: #e50914;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.logout-button:hover {
-  background-color: #b00710;
 }

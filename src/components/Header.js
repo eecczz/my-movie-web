@@ -11,7 +11,7 @@ function Header() {
   const handleSearch = () => {
     if (searchQuery.trim()) {
       navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
-      setSearchQuery(''); // 검색창 초기화
+      setSearchQuery('');
     }
   };
 
@@ -32,22 +32,43 @@ function Header() {
         </a>
       </div>
       <nav className="header__nav">
-        <a href="/my-movie-web/">홈</a>
-        <a href="/my-movie-web/popular">대세 콘텐츠</a>
-        <a href="/my-movie-web/wishlist">내가 찜한 리스트</a>
+        <span
+          className="nav-link"
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          홈
+        </span>
+        <span
+          className="nav-link"
+          onClick={() => {
+            navigate('/popular');
+          }}
+        >
+          인기 영화
+        </span>
+        <span
+          className="nav-link"
+          onClick={() => {
+            navigate('/wishlist');
+          }}
+        >
+          내가 찜한 리스트
+        </span>
       </nav>
       <div className="header__search">
-          <input
-            type="text"
-            value={searchQuery}
-            placeholder="영화 제목 검색"
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-          />
-          <button onClick={handleSearch}>
-            <FaSearch />
-          </button>
-        </div>
+        <input
+          type="text"
+          value={searchQuery}
+          placeholder="영화 제목 검색"
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+        />
+        <button onClick={handleSearch}>
+          <FaSearch />
+        </button>
+      </div>
       <div className="header__actions">
         <div className="header__user">
           <span>{authToken}</span>

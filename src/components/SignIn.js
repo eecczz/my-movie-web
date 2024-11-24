@@ -44,7 +44,7 @@ function SignIn() {
 
   return (
     <div className="auth-container">
-      <h2>Sign In</h2>
+      <h2>로그인</h2>
       <form onSubmit={handleLogin}>
         <input
           type="email"
@@ -70,14 +70,19 @@ function SignIn() {
           <label htmlFor="rememberMe">Remember Me</label>
         </div>
         <button type="submit" className="auth-button">
-          Log In
+          로그인
         </button>
       </form>
       <p>
-        Don't have an account?{' '}
-        <a href="/my-movie-web/signup" className="auth-link">
-          Sign up
-        </a>
+      계정이 없으신가요?{' '}
+        <span
+          className="auth-link"
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
+          회원가입
+        </span>
       </p>
       <ToastContainer />
     </div>

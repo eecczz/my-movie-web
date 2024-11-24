@@ -11,9 +11,20 @@ function Popular() {
   const [viewMode, setViewMode] = useState('infinite'); // "table" or "infinite"
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [wishlist, setWishlist] = useState(
     JSON.parse(localStorage.getItem('wishlist')) || []
   );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollToTop(window.scrollY > 200); // 스크롤 위치가 200px 이상일 때 버튼 표시
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (viewMode === 'infinite') {
@@ -22,18 +33,6 @@ function Popular() {
       loadMoviesForTable(page);
     }
   }, [page, viewMode]);
-
-  const [showScrollButton, setShowScrollButton] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollButton(window.scrollY > 200); // 스크롤 위치가 200px 이상일 때 버튼 표시
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -143,9 +142,11 @@ function Popular() {
           </div>
         </InfiniteScroll>
       )}
-      <button className="scroll-to-top" onClick={scrollToTop}>
+    {showScrollToTop && (
+        <button className="scroll-to-top" onClick={scrollToTop}>
           <FaArrowUp />
         </button>
+      )}
     </div>
   );
 }

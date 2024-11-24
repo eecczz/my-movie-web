@@ -84,7 +84,14 @@ function SignUp() {
       </form>
       <p>
         이미 계정이 있으신가요?{' '}
-        <a href="/my-movie-web/signin">로그인</a>
+        <span
+          className="auth-link"
+          onClick={() => {
+            navigate("/signin");
+          }}
+        >
+          로그인
+        </span>
       </p>
     </div>
   );
