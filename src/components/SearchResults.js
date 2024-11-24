@@ -4,7 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchDynamicMovies } from '../services/URL';
 import './SearchResults.css';
 import Header from './Header';
-import { FaHeart } from 'react-icons/fa'; // 좋아요 아이콘
+import { FaHeart, FaArrowUp } from 'react-icons/fa'; // 좋아요 및 화살표 아이콘
 
 function SearchResults() {
   const location = useLocation();
@@ -17,6 +17,7 @@ function SearchResults() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   const [filters, setFilters] = useState({
     genre: '',
@@ -90,8 +91,22 @@ function SearchResults() {
     applyFiltersAndSorting();
   }, [movies, filters]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollToTop(window.scrollY > 200);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const resetFilters = () => {
     setFilters({ genre: '', rating: '', sort: '' });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleWishlistToggle = (movie) => {
@@ -129,7 +144,6 @@ function SearchResults() {
         </div>
       </div>
     ));
-  
 
   if (loading && page === 1) return <div className="loading">검색 중...</div>;
 
@@ -176,6 +190,11 @@ function SearchResults() {
       >
         <div className="movies-grid">{renderMovies()}</div>
       </InfiniteScroll>
+      {showScrollToTop && (
+        <button className="scroll-to-top" onClick={scrollToTop}>
+          <FaArrowUp />
+        </button>
+      )}
     </div>
   );
 }

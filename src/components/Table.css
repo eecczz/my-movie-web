@@ -1,4 +1,7 @@
 /* Table.css */
+body {
+  margin-top: 60px; /* 헤더의 높이만큼 여백 추가 */
+}
 
 .table-view {
     display: grid;

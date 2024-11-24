@@ -1,70 +1,93 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 프로젝트 이름: My Movie Web
 
-## Available Scripts
+## 프로젝트 기본 정보
+**My Movie Web**은 영화 정보를 검색하고 위시리스트를 관리할 수 있는 웹 애플리케이션입니다.  
+사용자는 TMDb API를 활용하여 인기 영화, 특정 검색어에 따른 영화 정보를 확인하고 위시리스트를 구성할 수 있습니다.  
+검색, 필터링, 정렬 기능을 통해 다양한 영화 데이터를 효과적으로 탐색할 수 있습니다.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 기술 스택 명시
+### **Frontend**
+- **React**: 사용자 인터페이스 구성
+- **React Router**: 클라이언트 사이드 라우팅
+- **React Icons**: 아이콘 사용 (ex. 좋아요 아이콘)
+- **React Toastify**: 알림 메시지 구현
+- **CSS**: 스타일링 및 반응형 디자인
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### **Backend**
+- **TMDb API**: 영화 데이터 가져오기
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 설치 및 실행 가이드
+### 1. 프로젝트 클론
+```bash
+git clone https://github.com/eecczz/my-movie-web.git
+cd my-movie-web
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. 의존성 설치
+```bash
+npm install react-router-dom
+npm install react-icons
+npm install react-infinite-scroll-component
+npm install react-toastify 
+npm install react-transition-group
 
-### `npm run build`
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 3. 환경 변수 설정
+프로젝트 루트 디렉토리에 `.env` 파일을 생성하고, TMDb API 키를 입력하세요:
+```
+REACT_APP_TMDB_API_KEY=62d0f52db114343391086b1cca730cef
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 4. 개발 서버 실행
+```bash
+npm start
+```
+- 브라우저에서 [http://localhost:3000/my-movie-web](http://localhost:3000/my-movie-web)을 열어 애플리케이션을 실행합니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 프로젝트 (폴더) 구조 설명
+```
+src/
+├── components/                   # 주요 컴포넌트 폴더
+│   ├── Auth.css                  # 로그인 및 회원가입 관련 스타일
+│   ├── Header.css                # 헤더 스타일
+│   ├── Header.js                 # 헤더 컴포넌트
+│   ├── HomeMain.css              # 홈 페이지 스타일
+│   ├── HomeMain.js               # 홈 페이지 메인 컴포넌트
+│   ├── Loading.css               # 로딩 화면 스타일
+│   ├── Loading.js                # 로딩 화면 컴포넌트
+│   ├── Popular.css               # 인기 콘텐츠 스타일
+│   ├── Popular.js                # 인기 콘텐츠 컴포넌트
+│   ├── SearchResults.css         # 검색 결과 페이지 스타일
+│   ├── SearchResults.js          # 검색 결과 페이지 컴포넌트
+│   ├── SignIn.js                 # 로그인 페이지 컴포넌트
+│   ├── SignUp.js                 # 회원가입 페이지 컴포넌트
+│   ├── Table.css                 # 테이블 관련 스타일
+│   ├── useRecommendations.js     # 추천 로직 관련 커스텀 훅
+│   ├── Wishlist.css              # 위시리스트 스타일
+│   ├── Wishlist.js               # 위시리스트 컴포넌트
+│
+├── services/                     # 서비스 로직 폴더
+│   ├── Authentication.js         # 인증 관련 API 로직
+│   ├── URL.js                    # API URL 관련 파일
+│   ├── useWishlist.js            # 위시리스트 관련 커스텀 훅
+│
+├── App.css                       # 글로벌 스타일링
+├── App.js                        # 앱 엔트리 포인트
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 주요 기능
+1. **영화 탐색**: TMDb API를 통해 인기 영화와 검색된 영화를 확인.
+2. **필터 및 정렬**: 장르, 평점, 정렬 기준을 선택하여 데이터 탐색.
+3. **위시리스트 관리**: 영화를 위시리스트에 추가하거나 제거.
+4. **사용자 경험**: 부드러운 애니메이션과 맨 위로 버튼을 통해 향상된 UI 제공.
