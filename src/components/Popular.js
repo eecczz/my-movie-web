@@ -1,4 +1,3 @@
-// Popular.js
 import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchMovies, URLS } from '../services/URL';
@@ -10,6 +9,7 @@ function Popular() {
   const [movies, setMovies] = useState([]);
   const [viewMode, setViewMode] = useState('infinite'); // "table" or "infinite"
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1); // 총 페이지 수
   const [hasMore, setHasMore] = useState(true);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [wishlist, setWishlist] = useState(
@@ -37,7 +37,7 @@ function Popular() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  
+
   const loadMovies = async () => {
     const data = await fetchMovies(URLS.popularMovies(page));
     setMovies((prevMovies) => [...prevMovies, ...data.results]);
@@ -47,6 +47,7 @@ function Popular() {
   const loadMoviesForTable = async (currentPage) => {
     const data = await fetchMovies(URLS.popularMovies(currentPage));
     setMovies(data.results || []);
+    setTotalPages(data.total_pages || 1); // 총 페이지 수 업데이트
   };
 
   const handleWishlistToggle = (movie) => {
@@ -68,6 +69,18 @@ function Popular() {
     setViewMode('infinite');
     setMovies([]); // 무한 스크롤 데이터를 초기화
     setPage(1); // 페이지를 초기화
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (page < totalPages) {
+      setPage((prevPage) => prevPage + 1);
+    }
   };
 
   return (
@@ -98,15 +111,27 @@ function Popular() {
             </div>
           ))}
           <div className="pagination">
-            {[1, 2, 3, 4, 5].map((pageNum) => (
+            <button
+              disabled={page === 1} // 첫 페이지에서는 비활성화
+              onClick={handlePreviousPage}
+            >
+              이전
+            </button>
+            {[...Array(totalPages).keys()].slice(0, 5).map((pageNum) => (
               <button
-                key={pageNum}
-                className={page === pageNum ? 'active' : ''}
-                onClick={() => setPage(pageNum)}
+                key={pageNum + 1}
+                className={page === pageNum + 1 ? 'active' : ''}
+                onClick={() => setPage(pageNum + 1)}
               >
-                {pageNum}
+                {pageNum + 1}
               </button>
             ))}
+            <button
+              disabled={page === totalPages} // 마지막 페이지에서는 비활성화
+              onClick={handleNextPage}
+            >
+              다음
+            </button>
           </div>
         </div>
       ) : (
@@ -142,7 +167,7 @@ function Popular() {
           </div>
         </InfiniteScroll>
       )}
-    {showScrollToTop && (
+      {showScrollToTop && (
         <button className="scroll-to-top" onClick={scrollToTop}>
           <FaArrowUp />
         </button>

@@ -66,19 +66,19 @@
 
 .filters select:hover,
 .filters button:hover {
-  background-color: #7b42f6; /* 보라색 강조 */
+  background-color: #6c63ff; /* 보라색 강조 */
   color: #fff; /* 텍스트 흰색 */
 }
 
 .filters button {
-  background-color: #7b42f6; /* 기본 보라색 */
+  background-color: #6c63ff; /* 기본 보라색 */
   color: white; /* 텍스트 흰색 */
 }
 
 .loading {
   text-align: center;
   font-size: 1.5rem;
-  color: #7b42f6; /* 보라색 강조 */
+  color: #6c63ff; /* 보라색 강조 */
 }
 
 @media (max-width: 768px) {
@@ -145,9 +145,9 @@
   cursor: pointer;
   font-size: 1.2em;
   margin-left: 10px;
-  color: #7b42f6; /* 보라색 */
+  color: #6c63ff; /* 보라색 */
 }
 
 .wishlist-button:hover {
-  color: #5d2db1; /* 더 진한 보라색 */
+  color: #6c63ff; /* 더 진한 보라색 */
 }

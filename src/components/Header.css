@@ -44,7 +44,7 @@
 }
 
 .nav-link:hover {
-  color: #7b42f6;
+  color: #6c63ff;
 }
 
 /* 검색창 */
@@ -69,7 +69,7 @@
 }
 
 .header__search button {
-  background-color: #7b42f6;
+  background-color: #6c63ff;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -92,7 +92,7 @@
 }
 
 .logout-button {
-  background-color: #7b42f6;
+  background-color: #6c63ff;
   color: white;
   border: none;
   padding: 8px 12px;

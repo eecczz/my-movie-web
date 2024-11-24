@@ -55,7 +55,7 @@ function Header() {
         <div className="header__logo">
           <a>
             <span
-              style={{ color: '#7b42f6', fontWeight: 'bold', fontSize: '24px' }}
+              style={{ color: '#6c63ff', fontWeight: 'bold', fontSize: '24px' }}
               onClick={() => {
                 navigate('/');
               }}

@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/my-movie-web/static/css/main.9a73499a.css",
-    "main.js": "/my-movie-web/static/js/main.b5093952.js",
+    "main.css": "/my-movie-web/static/css/main.e8fd0193.css",
+    "main.js": "/my-movie-web/static/js/main.e751ae2a.js",
     "static/js/453.f9cf81eb.chunk.js": "/my-movie-web/static/js/453.f9cf81eb.chunk.js",
     "static/media/slick.svg": "/my-movie-web/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/my-movie-web/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/my-movie-web/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/my-movie-web/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/my-movie-web/index.html",
-    "main.9a73499a.css.map": "/my-movie-web/static/css/main.9a73499a.css.map",
-    "main.b5093952.js.map": "/my-movie-web/static/js/main.b5093952.js.map",
+    "main.e8fd0193.css.map": "/my-movie-web/static/css/main.e8fd0193.css.map",
+    "main.e751ae2a.js.map": "/my-movie-web/static/js/main.e751ae2a.js.map",
     "453.f9cf81eb.chunk.js.map": "/my-movie-web/static/js/453.f9cf81eb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9a73499a.css",
-    "static/js/main.b5093952.js"
+    "static/css/main.e8fd0193.css",
+    "static/js/main.e751ae2a.js"
   ]
 }
