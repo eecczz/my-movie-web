@@ -30,11 +30,8 @@ cd my-movie-web
 
 ### 2. 의존성 설치
 ```bash
-npm install react-router-dom
-npm install react-icons
-npm install react-infinite-scroll-component
-npm install react-toastify 
-npm install react-transition-group
+위 프로젝트 폴더 경로에서 아래 명령어 실행
+npm install
 
 ```
 
