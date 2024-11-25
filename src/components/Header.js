@@ -60,7 +60,7 @@ function Header() {
                 navigate('/');
               }}
             >
-              SEANEMA
+              SEONEMA
             </span>
           </a>
         </div>

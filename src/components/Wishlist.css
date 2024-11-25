@@ -71,3 +71,31 @@ body {
 .wishlist-button:hover {
   background-color: #4a41d0; /* 진한 보라색 */
 }
+
+@media (max-width: 768px) {
+  .movie-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.8); /* 더 어두운 배경 */
+    font-size: 0.8em; /* 텍스트 크기 축소 */
+    max-height: 60%; /* 영화 포스터 높이의 60%까지만 차지 */
+    overflow-y: auto; /* 스크롤 가능 */
+  }
+
+  .movie-info h3 {
+    font-size: 1em; /* 제목 텍스트 크기 축소 */
+    margin-bottom: 5px;
+  }
+
+  .movie-info p {
+    font-size: 0.7em; /* 본문 텍스트 크기 축소 */
+    margin: 0;
+    line-height: 1.2; /* 줄 간격 축소 */
+    max-height: 50px; /* 본문 텍스트 최대 높이 제한 */
+    overflow: hidden; /* 내용이 넘치면 숨김 */
+    text-overflow: ellipsis; /* 말줄임표(...) 추가 */
+  }
+}
