@@ -8,8 +8,10 @@ function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled] = useState(false); // 스크롤 상태
   const [showScrollToTop, setShowScrollToTop] = useState(false); // 맨위로 버튼 상태
-  const authToken = localStorage.getItem('authToken');
   const [sidebarOpen, setSidebarOpen] = useState(false); // 사이드바 열림 상태
+
+  const authToken = localStorage.getItem('authToken');
+  const userEmail = authToken ? authToken.split('@')[0] : ''; // '@' 앞부분만 추출
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,7 +111,7 @@ function Header() {
 
         {/* 로그아웃 버튼과 이메일 */}
         <div className="header__actions">
-          <span className="header__user">{authToken}</span>
+          <span className="header__user">{userEmail}</span>
           <button onClick={handleLogout} className="logout-button">
             로그아웃
           </button>
