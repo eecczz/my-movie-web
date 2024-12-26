@@ -36,16 +36,13 @@ npm install
 ```
 
 ### 3. 환경 변수 설정
-프로젝트 루트 디렉토리에 `.env` 파일을 생성하고, TMDb API 키를 입력하세요:
-```
-REACT_APP_TMDB_API_KEY=62d0f52db114343391086b1cca730cef
-```
+프로젝트 루트 디렉토리에 `.env.production`,`.env.development`  파일을 생성하세요.
 
 ### 4. 개발 서버 실행
 ```bash
 npm start
 ```
-- 브라우저에서 [http://localhost:3000/my-movie-web](http://localhost:3000/my-movie-web)을 열어 애플리케이션을 실행합니다.
+- 브라우저에서 [http://localhost:3001/my-movie-web](http://localhost:3001/my-movie-web)을 열어 애플리케이션을 실행합니다.
 
 ---
 
@@ -88,3 +85,4 @@ src/
 2. **필터 및 정렬**: 장르, 평점, 정렬 기준을 선택하여 데이터 탐색.
 3. **위시리스트 관리**: 영화를 위시리스트에 추가하거나 제거.
 4. **사용자 경험**: 부드러운 애니메이션과 맨 위로 버튼을 통해 향상된 UI 제공.
+5. **카카오 로그인**: KakaoAPI를 사용한 카카오 로그인.
