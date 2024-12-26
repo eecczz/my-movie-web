@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'r
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import HomeMain from './components/HomeMain';
 import Popular from './components/Popular';
-import SignIn from './components/SignIn';
+import SignIn from './components/Signin';
 import SignUp from './components/SignUp';
 import Wishlist from './components/Wishlist';
 import SearchResults from './components/SearchResults';
