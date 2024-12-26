@@ -5,23 +5,17 @@ import './Header.css';
 
 function Header() {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태
   const [scrolled, setScrolled] = useState(false); // 스크롤 상태
-  const [showScrollToTop, setShowScrollToTop] = useState(false); // 맨위로 버튼 상태
-  const [sidebarOpen, setSidebarOpen] = useState(false); // 사이드바 열림 상태
-
-  const authToken = localStorage.getItem('authToken');
-  const userEmail = authToken ? authToken.split('@')[0] : ''; // '@' 앞부분만 추출
+  const [showScrollToTop, setShowScrollToTop] = useState(false); // 맨 위로 버튼 표시 여부
+  const [sidebarOpen, setSidebarOpen] = useState(false); // 사이드바 상태
+  const [userName, setUserName] = useState('Guest'); // 사용자 이름
 
   useEffect(() => {
+    // 스크롤 이벤트 핸들러
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-        setShowScrollToTop(true); // 스크롤이 50px 이상이면 버튼 표시
-      } else {
-        setScrolled(false);
-        setShowScrollToTop(false); // 스크롤이 적으면 버튼 숨김
-      }
+      setScrolled(window.scrollY > 50); // 스크롤 위치가 50px 이상인지 확인
+      setShowScrollToTop(window.scrollY > 200); // 스크롤 위치가 200px 이상인지 확인
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -30,69 +24,53 @@ function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    // 사용자 정보 로드
+    const userInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
+    const userNickname = userInfo?.properties?.nickname || 'Guest';
+    setUserName(userNickname);
+  }, [localStorage.getItem('userInfo')]); // 로컬 저장소 변경 시 업데이트
+
   const handleSearch = () => {
     if (searchQuery.trim()) {
-      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
-      setSearchQuery('');
+      navigate(`/search?query=${encodeURIComponent(searchQuery)}`); // 검색 쿼리를 URL로 전달
+      setSearchQuery(''); // 검색 입력창 초기화
     }
   };
 
   const handleLogout = () => {
+    // 로컬 저장소 초기화
     localStorage.removeItem('authToken');
-    sessionStorage.removeItem('authToken');
-    navigate('/signin');
+    localStorage.removeItem('userInfo');
+    setUserName('Guest'); // 사용자 이름 초기화
+    navigate('/signin'); // 로그인 페이지로 이동
   };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // 부드럽게 스크롤
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // 페이지 맨 위로 스크롤
   };
 
   const toggleSidebar = () => {
-    setSidebarOpen((prevState) => !prevState); // 상태 반전
+    setSidebarOpen((prev) => !prev); // 사이드바 상태 변경
   };
 
   return (
     <>
       <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
         <div className="header__logo">
-          <a>
-            <span
-              style={{ color: '#6c63ff', fontWeight: 'bold', fontSize: '24px' }}
-              onClick={() => {
-                navigate('/');
-              }}
-            >
-              SEONEMA
-            </span>
-          </a>
+          <span
+            style={{ color: '#6c63ff', fontWeight: 'bold', fontSize: '24px', cursor: 'pointer' }}
+            onClick={() => navigate('/')}
+          >
+            SEONEMA
+          </span>
         </div>
 
-        {/* PC용 네비게이션 */}
+        {/* 내비게이션 메뉴 */}
         <nav className="header__nav">
-          <span
-            className="nav-link"
-            onClick={() => {
-              navigate('/');
-            }}
-          >
-            홈
-          </span>
-          <span
-            className="nav-link"
-            onClick={() => {
-              navigate('/popular');
-            }}
-          >
-            인기 영화
-          </span>
-          <span
-            className="nav-link"
-            onClick={() => {
-              navigate('/wishlist');
-            }}
-          >
-            내가 찜한 리스트
-          </span>
+          <span className="nav-link" onClick={() => navigate('/')}>홈</span>
+          <span className="nav-link" onClick={() => navigate('/popular')}>인기 영화</span>
+          <span className="nav-link" onClick={() => navigate('/wishlist')}>내가 찜한 리스트</span>
         </nav>
 
         {/* 검색창 */}
@@ -109,48 +87,26 @@ function Header() {
           </button>
         </div>
 
-        {/* 로그아웃 버튼과 이메일 */}
+        {/* 사용자 액션 버튼 */}
         <div className="header__actions">
-          <span className="header__user">{userEmail}</span>
-          <button onClick={handleLogout} className="logout-button">
-            로그아웃
-          </button>
+          <span className="header__user">{userName}</span>
+          {localStorage.getItem('authToken') ? (
+            <button onClick={handleLogout} className="logout-button">로그아웃</button>
+          ) : (
+            <button onClick={() => navigate('/signin')} className="login-button">로그인</button>
+          )}
         </div>
 
-        {/* 모바일 메뉴 버튼 */}
+        {/* 사이드바 버튼 */}
         <button className="header__menu-button" onClick={toggleSidebar}>
           <FaBars />
         </button>
 
         {/* 사이드바 */}
         <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-          <span
-            className="nav-link"
-            onClick={() => {
-              navigate('/');
-              setSidebarOpen(false);
-            }}
-          >
-            홈
-          </span>
-          <span
-            className="nav-link"
-            onClick={() => {
-              navigate('/popular');
-              setSidebarOpen(false);
-            }}
-          >
-            인기 영화
-          </span>
-          <span
-            className="nav-link"
-            onClick={() => {
-              navigate('/wishlist');
-              setSidebarOpen(false);
-            }}
-          >
-            내가 찜한 리스트
-          </span>
+          <span className="nav-link" onClick={() => navigate('/')}>홈</span>
+          <span className="nav-link" onClick={() => navigate('/popular')}>인기 영화</span>
+          <span className="nav-link" onClick={() => navigate('/wishlist')}>내가 찜한 리스트</span>
         </div>
       </header>
 
