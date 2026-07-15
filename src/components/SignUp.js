@@ -34,8 +34,7 @@ function SignUp() {
       return;
     }
 
-    const apiKey = '62d0f52db114343391086b1cca730cef'; // 실제 TMDB API 키를 여기에 입력
-    const newUser = { email, password: apiKey }; // API 키를 비밀번호로 저장
+    const newUser = { email, password };
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 
