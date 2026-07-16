@@ -29,6 +29,7 @@ jobs:
       - name: Build
         run: npm run build:prod
         env:
+          CI: false
           REACT_APP_TMDB_API_KEY: ${{ secrets.REACT_APP_TMDB_API_KEY || vars.REACT_APP_TMDB_API_KEY }}
           REACT_APP_K_REST_API_KEY: ${{ secrets.REACT_APP_K_REST_API_KEY || vars.REACT_APP_K_REST_API_KEY }}
           REACT_APP_REDIRECT_URI: ${{ secrets.REACT_APP_REDIRECT_URI || vars.REACT_APP_REDIRECT_URI }}
